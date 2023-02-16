@@ -1,12 +1,12 @@
 public class Employee {
-    private String employee;
+    private String fullName;
     private int department;
     private double salary;
     public static int idCounter;
     private int id;
 
-    public Employee(String employee, int department, double salary) {
-        this.employee = employee;
+    public Employee(String fullName, int department, double salary) {
+        this.fullName = fullName;
         this.department = department;
         this.salary = salary;
         idCounter++;
@@ -21,8 +21,8 @@ public class Employee {
         return id;
     }
 
-    public String getEmployee() {
-        return employee;
+    public String getFullName() {
+        return fullName;
     }
 
     public int getDepartment() {
@@ -42,7 +42,7 @@ public class Employee {
     }
 
     public String toString() {
-        return id + " ФИО: " + employee + ", отдел: " + department + ", зарплата: " + salary;
+        return id + " ФИО: " + fullName + ", отдел: " + department + ", зарплата: " + salary;
     }
 }
 
