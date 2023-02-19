@@ -10,12 +10,9 @@ public class Employee {
         this.department = department;
         this.salary = salary;
         idCounter++;
-        this.id = getIdCounter();
+        this.id = idCounter;
     }
 
-    private int getIdCounter() {
-        return idCounter;
-    }
 
     public int getId() {
         return id;

@@ -12,7 +12,7 @@ public class Main {
         employeeBook.addEmployee("Бурундукова Д.Е.", 5, 47543);
         employeeBook.addEmployee("Кузнецова П.Е.", 3, 78313);
         employeeBook.addEmployee("Грибов А.А.", 1, 65423);
-        employeeBook.addEmployee("Беднов А.В.", 4, 78313);
+        employeeBook.addEmployee("Беднов А.В.", 4, 78315);
         employeeBook.addEmployee("Грачева Е.В.", 5, 65423);
         employeeBook.addEmployee("Семенова Л.А.", 2, 59480);
 
@@ -20,7 +20,8 @@ public class Main {
         employeeBook.printAList();
         System.out.println(" ");
         employeeBook.calculateSalary();
-        employeeBook.calculateMinMaxSalary();
+        employeeBook.findMaxSalary();;
+        employeeBook.findMinSalary();
         System.out.println(" ");
         System.out.println("ФИО сотрудников:");
         employeeBook.printFullName();
@@ -34,8 +35,8 @@ public class Main {
         System.out.println("Список сотрудников отдела " + departmentNumber + ":");
         employeeBook.printAListInTheDepartment(departmentNumber);
         System.out.println(" ");
-        employeeBook.calculateMinSalaryInTheDepartment(departmentNumber);
-        employeeBook.calculateMaxSalaryInTheDepartment(departmentNumber);
+        employeeBook.findMinSalaryInTheDepartment(departmentNumber);
+        employeeBook.findMaxSalaryInTheDepartment(departmentNumber);
         employeeBook.calculateSalaryInTheDepartment(departmentNumber);
         System.out.println(" ");
         employeeBook.indexSalaryInTheDepartment(departmentNumber, percent);
@@ -58,8 +59,10 @@ public class Main {
         employeeBook.addEmployee("Сташкова А.А.", 4, 78313);
 
 //      меняем зарплату
+        double changedSalary = 93214;
+        int changeDepartment = 5;
         System.out.println();
-        employeeBook.changeEmployee("Сташкова А.А.");
+        employeeBook.changeEmployee("Сташкова А.А.", changedSalary,changeDepartment);
 
 //      печатаем сотрудников по отделам
         System.out.println();

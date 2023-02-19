@@ -36,12 +36,12 @@ public class EmployeeBook {
         System.out.println(fullName + " не найден");
     }
 
-    public void changeEmployee(String fullName) {
+    public void changeEmployee(String fullName, double changedSalary, int changeDepartment) {
         for (int i = 0; i < size; i++) {
             if (employees[i].getFullName().equals(fullName)) {
                 System.out.println("Найден сотрудник: " + employees[i]);
-                employees[i].setSalary(94256);
-                employees[i].setDepartment(5);
+                employees[i].setSalary(changedSalary);
+                employees[i].setDepartment(changeDepartment);
 //       тут хотела сделать проверку: если номер отдела, который мы хотим установить, совпадает с текущим номером отдела,
 //       то написать, что сотрудник уже в этом отделе, аналогично с зп, думала через if сделать. Не успеваю продумать этот момент:(
                 System.out.println("Сотрудник " + employees[i].getFullName() + "переведен в отдел: " + employees[i].getDepartment() + " с  зарплатой: " + employees[i].getSalary());
@@ -85,19 +85,24 @@ public class EmployeeBook {
 
     }
 
-    public void calculateMinMaxSalary() {
-        double max = employees[0].getSalary();
-        double min = employees[0].getSalary();
+    public void findMaxSalary() {
+        Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (element.getSalary() > max) {
-                max = element.getSalary();
-            }
-            if (element.getSalary() < min) {
-                min = element.getSalary();
+            if (empWithMinSalary == null || element.getSalary() > empWithMinSalary.getSalary()) {
+                empWithMinSalary = element;
             }
         }
-        System.out.println("Максимальная зарплата составила " + max + " рублей");
-        System.out.println("Минимальная зарплата составила " + min + " рублей");
+        System.out.println("Сотрудник с максимальной зарплатой " + empWithMinSalary + " рублей");
+    }
+
+    public void findMinSalary() {
+        Employee empWithMinSalary = null;
+        for (Employee element : employees) {
+            if (empWithMinSalary == null || element.getSalary() < empWithMinSalary.getSalary()) {
+                empWithMinSalary = element;
+            }
+        }
+        System.out.println("Сотрудник с минимальной зарплатой " + empWithMinSalary + " рублей");
     }
 
     public void indexSalary() {
@@ -107,44 +112,40 @@ public class EmployeeBook {
         for (Employee element : employees) {
 
             indexedSalary = element.getSalary() + element.getSalary() * percent / 100;
-            System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + indexedSalary + " рублей");
+            element.setSalary(indexedSalary);
+            System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + element.getSalary() + " рублей");
         }
     }
-//            анализ по сотрудникам одного отдела
 
-    public void calculateMinSalaryInTheDepartment(int departmentNumber) {
-        double min = employees[0].getSalary();
-
+    //            анализ по сотрудникам одного отдела
+    public void findMaxSalaryInTheDepartment(int departmentNumber) {
+        Employee empWithMinSalary = null;
         for (Employee element : employees) {
             if (element.getDepartment() == departmentNumber) {
-                if (element.getSalary() < min) {
-                    min = element.getSalary();
+                if (empWithMinSalary == null || element.getSalary() > empWithMinSalary.getSalary()) {
+                    empWithMinSalary = element;
                 }
             }
         }
-        System.out.println("Минимальная зарплата по отделу " + departmentNumber + " составила " + min + " рублей");
+        System.out.println("Сотрудник с максимальной зарплатой " + empWithMinSalary + " рублей");
     }
 
-    public void calculateMaxSalaryInTheDepartment(int departmentNumber) {
-        double max = employees[0].getSalary();
-
+    public void findMinSalaryInTheDepartment(int departmentNumber) {
+        Employee empWithMinSalary = null;
         for (Employee element : employees) {
             if (element.getDepartment() == departmentNumber) {
-                if (element.getSalary() > max) {
-                    max = element.getSalary();
+                if (empWithMinSalary == null || element.getSalary() < empWithMinSalary.getSalary()) {
+                    empWithMinSalary = element;
                 }
             }
         }
-        System.out.println("Максимальная зарплата по отделу " + departmentNumber + " составила " + max + " рублей");
+        System.out.println("Сотрудник с минимальной зарплатой " + empWithMinSalary + " рублей");
     }
+
 
     public void printAListInTheDepartment(int departmentNumber) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == departmentNumber) {
-                if (i == employees.length - 1) {
-                    System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
-                    break;
-                }
                 System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
             }
         }
@@ -175,7 +176,8 @@ public class EmployeeBook {
             if (element.getDepartment() == departmentNumber) {
 
                 indexedSalary = element.getSalary() + element.getSalary() * percent / 100;
-                System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + indexedSalary + " рублей");
+                element.setSalary(indexedSalary);
+                System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + element.getSalary() + " рублей");
             }
         }
     }
@@ -206,10 +208,6 @@ public class EmployeeBook {
             for (int i = 0; i < employees.length; i++) {
                 if (employees[i].getDepartment() == departmentNumber) {
 
-                    if (i == employees.length - 1) {
-                        System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
-                        break;
-                    }
                     System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
                 }
             }
