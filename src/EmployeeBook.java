@@ -28,7 +28,7 @@ public class EmployeeBook {
 
     public void findEmployee(String fullName) {
         for (int i = 0; i < size; i++) {
-            if (employees[i].getFullName().equals(fullName)) {
+            if (employees[i].getFullName().equals(fullName)){
                 System.out.println("Найден сотрудник: " + employees[i]);
                 return;
             }
@@ -38,12 +38,10 @@ public class EmployeeBook {
 
     public void changeEmployee(String fullName, double changedSalary, int changeDepartment) {
         for (int i = 0; i < size; i++) {
-            if (employees[i].getFullName().equals(fullName)) {
+            if (employees[i] != null && employees[i].getFullName().equals(fullName)) {
                 System.out.println("Найден сотрудник: " + employees[i]);
                 employees[i].setSalary(changedSalary);
                 employees[i].setDepartment(changeDepartment);
-//       тут хотела сделать проверку: если номер отдела, который мы хотим установить, совпадает с текущим номером отдела,
-//       то написать, что сотрудник уже в этом отделе, аналогично с зп, думала через if сделать. Не успеваю продумать этот момент:(
                 System.out.println("Сотрудник " + employees[i].getFullName() + "переведен в отдел: " + employees[i].getDepartment() + " с  зарплатой: " + employees[i].getSalary());
                 return;
             }
@@ -76,9 +74,11 @@ public class EmployeeBook {
         double sum = 0;
         double averageSalary = 0;
         for (Employee element : employees) {
+            if (element != null) {
 
-            sum += element.getSalary();
-            averageSalary = sum / employees.length;
+                sum += element.getSalary();
+                averageSalary = sum / employees.length;
+            }
         }
         System.out.println("Сумма затрат на зарплаты за месяц составила " + sum + " рублей");
         System.out.println("Средняя зарплата за месяц " + averageSalary + " рублей");
@@ -88,7 +88,7 @@ public class EmployeeBook {
     public void findMaxSalary() {
         Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (empWithMinSalary == null || element.getSalary() > empWithMinSalary.getSalary()) {
+            if (element != null && empWithMinSalary == null || element != null && element.getSalary() > empWithMinSalary.getSalary()) {
                 empWithMinSalary = element;
             }
         }
@@ -98,7 +98,7 @@ public class EmployeeBook {
     public void findMinSalary() {
         Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (empWithMinSalary == null || element.getSalary() < empWithMinSalary.getSalary()) {
+            if (element != null && empWithMinSalary == null || element != null && element.getSalary() < empWithMinSalary.getSalary()) {
                 empWithMinSalary = element;
             }
         }
@@ -110,10 +110,12 @@ public class EmployeeBook {
         int percent = 7;
         double indexedSalary = 0;
         for (Employee element : employees) {
+            if (element != null) {
 
-            indexedSalary = element.getSalary() + element.getSalary() * percent / 100;
-            element.setSalary(indexedSalary);
-            System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + element.getSalary() + " рублей");
+                indexedSalary = element.getSalary() + element.getSalary() * percent / 100;
+                element.setSalary(indexedSalary);
+                System.out.println("Сотрудник " + element.getFullName() + ", проиндексированная зарплата: " + element.getSalary() + " рублей");
+            }
         }
     }
 
@@ -121,7 +123,7 @@ public class EmployeeBook {
     public void findMaxSalaryInTheDepartment(int departmentNumber) {
         Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (element.getDepartment() == departmentNumber) {
+            if (element != null && element.getDepartment() == departmentNumber) {
                 if (empWithMinSalary == null || element.getSalary() > empWithMinSalary.getSalary()) {
                     empWithMinSalary = element;
                 }
@@ -133,7 +135,7 @@ public class EmployeeBook {
     public void findMinSalaryInTheDepartment(int departmentNumber) {
         Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (element.getDepartment() == departmentNumber) {
+            if (element != null && element.getDepartment() == departmentNumber) {
                 if (empWithMinSalary == null || element.getSalary() < empWithMinSalary.getSalary()) {
                     empWithMinSalary = element;
                 }
@@ -145,7 +147,7 @@ public class EmployeeBook {
 
     public void printAListInTheDepartment(int departmentNumber) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartment() == departmentNumber) {
+            if (employees[i] != null && employees[i].getDepartment() == departmentNumber) {
                 System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
             }
         }
@@ -157,7 +159,7 @@ public class EmployeeBook {
         double averageSalary = 0;
         int i = 0;
         for (Employee element : employees) {
-            if (element.getDepartment() == departmentNumber) {
+            if (element != null && element.getDepartment() == departmentNumber) {
                 sum += element.getSalary();
                 i++;
                 averageSalary = sum / i;
@@ -173,7 +175,7 @@ public class EmployeeBook {
 
         double indexedSalary = 0;
         for (Employee element : employees) {
-            if (element.getDepartment() == departmentNumber) {
+            if (element != null && element.getDepartment() == departmentNumber) {
 
                 indexedSalary = element.getSalary() + element.getSalary() * percent / 100;
                 element.setSalary(indexedSalary);
@@ -185,7 +187,7 @@ public class EmployeeBook {
     //    сравниваем зарплату сотрудников с заданным числом
     public void calculateSalaryLessThenANumber(double number) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() < number) {
+            if (employees[i] != null && employees[i].getSalary() < number) {
                 System.out.println(employees[i].getId() + ". Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
             }
         }
@@ -193,7 +195,7 @@ public class EmployeeBook {
 
     public void calculateSalaryMoreThenANumber(double number) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getSalary() > number) {
+            if (employees[i] != null && employees[i].getSalary() > number) {
                 System.out.println(employees[i].getId() + ". Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
             }
         }
@@ -206,7 +208,7 @@ public class EmployeeBook {
             System.out.println();
             System.out.println("Список сотрудников отдела: " + departmentNumber);
             for (int i = 0; i < employees.length; i++) {
-                if (employees[i].getDepartment() == departmentNumber) {
+                if (employees[i] != null && employees[i].getDepartment() == departmentNumber) {
 
                     System.out.println("Сотрудник " + employees[i].getFullName() + ", зарплата: " + employees[i].getSalary() + " рублей");
                 }

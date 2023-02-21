@@ -19,12 +19,16 @@ public class Main {
         System.out.println("Список сотрудников:");
         employeeBook.printAList();
         System.out.println(" ");
-        employeeBook.calculateSalary();
-        employeeBook.findMaxSalary();;
-        employeeBook.findMinSalary();
+//      удаляем сотрудника
+        employeeBook.removeEmployee("Петров И.В.");
         System.out.println(" ");
         System.out.println("ФИО сотрудников:");
         employeeBook.printFullName();
+        System.out.println(" ");
+        employeeBook.calculateSalary();
+        employeeBook.findMaxSalary();
+        employeeBook.findMinSalary();
+
         System.out.println(" ");
         employeeBook.indexSalary();
 
@@ -62,7 +66,7 @@ public class Main {
         double changedSalary = 93214;
         int changeDepartment = 5;
         System.out.println();
-        employeeBook.changeEmployee("Сташкова А.А.", changedSalary,changeDepartment);
+        employeeBook.changeEmployee("Сташкова А.А.", changedSalary, changeDepartment);
 
 //      печатаем сотрудников по отделам
         System.out.println();
