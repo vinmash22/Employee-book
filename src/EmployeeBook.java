@@ -98,7 +98,7 @@ public class EmployeeBook {
     public void findMinSalary() {
         Employee empWithMinSalary = null;
         for (Employee element : employees) {
-            if (element != null && empWithMinSalary == null || element != null && element.getSalary() < empWithMinSalary.getSalary()) {
+            if (element != null && (empWithMinSalary == null || element.getSalary() < empWithMinSalary.getSalary())) {
                 empWithMinSalary = element;
             }
         }
